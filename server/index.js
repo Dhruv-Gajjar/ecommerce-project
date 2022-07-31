@@ -5,17 +5,30 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 
+// Connect DB
+const connectDB = require("./db/connectDB");
+
+// // Middleware
+const {
+  verifyToken,
+  verifyTokenAndAdmin,
+} = require("./middleware/verifyToken");
+
 // Routes
-const UserRoutes = require("./routes/users");
-const AuthRoutes = require("./routes/auth");
+const userRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
+const productsRoutes = require("./routes/product");
+const cartRoutes = require("./routes/cart");
+const orderRoutes = require("./routes/order");
 
 app.use(express.json());
 app.use(cors());
 
-app.use("/api", UserRoutes);
-app.use("/api", AuthRoutes);
-
-const connectDB = require("./db/connectDB");
+app.use("/api/users", userRoutes);
+app.use("/api", authRoutes);
+app.use("/api/products", productsRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
 const PORT = process.env.PORT || 5000;
 
