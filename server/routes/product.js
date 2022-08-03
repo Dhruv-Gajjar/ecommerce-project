@@ -8,11 +8,19 @@ const {
   getSingleProduct,
 } = require("../controllers/product");
 
-router.route("/", verifyTokenAndAdmin).get(getAllProduct).post(createProduct);
-router
-  .route("/:id", verifyTokenAndAdmin)
-  .get(getSingleProduct)
-  .put(updateProduct)
-  .delete(deleteProduct);
+// router.route("/", verifyTokenAndAdmin).get(getAllProduct).post(createProduct);
+// router
+//   .route("/:id", verifyTokenAndAdmin)
+//   .get(getSingleProduct)
+//   .put(updateProduct)
+//   .delete(deleteProduct);
+
+router.get("/",getAllProduct)
+router.post("/",createProduct)
+
+router.get("/:id",getSingleProduct)
+router.put("/:id",verifyTokenAndAdmin,updateProduct)
+router.delete("/:id",verifyTokenAndAdmin,deleteProduct)
+
 
 module.exports = router;

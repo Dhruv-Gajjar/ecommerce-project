@@ -3,13 +3,13 @@ const { StatusCodes } = require("http-status-codes");
 
 const getAllProduct = async (req, res) => {
   const qNew = req.query.new;
-  const qCategories = req.query.categories;
+  const qCategories = req.query.category;
 
   try {
     let product;
 
     if (qNew) {
-      product = await Product.find().sort({ createdAt: -1 }).limit(1);
+      product = await Product.find().sort({ createdAt: -1 }).limit(5);
     } else if (qCategories) {
       product = await Product.find({
         categories: {
